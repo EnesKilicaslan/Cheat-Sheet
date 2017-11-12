@@ -164,6 +164,6 @@ The first two approaches involved copying a file into a container. But as soon a
 
 
 
-***@author: Enes Kilicaslan***
+***@author: [Enes Kilicaslan](http://eneskilicaslan.github.io)***
 
-***@ref: Code School***
+***@ref: [Code School](https://www.codeschool.com/courses/try-docker)***
