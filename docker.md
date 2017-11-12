@@ -129,7 +129,7 @@ Like many Unix commands, the order of the arguments after the cp are important. 
 
 
 
-### Example:**
+### Example:
 
 The following commands run a docker from image web-server:1.1 mapping  port 80 on the host to port 80 on the container and also use the **--detach** flag to make the container run in the background.
 
