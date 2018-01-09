@@ -74,10 +74,10 @@ Since we can distribute Dockerfiles to other developers, it's a good idea to put
 
 ```docker
 
-FROM httpd:2.4
-EXPOSE 80
-RUN apt-get update && apt-get install -y fortunes
-LABEL maintainer="moby-dock@example.com"
+  FROM httpd:2.4
+  EXPOSE 80
+  RUN apt-get update && apt-get install -y fortunes
+  LABEL maintainer="moby-dock@example.com"
 
 ```
 
@@ -87,6 +87,14 @@ LABEL maintainer="moby-dock@example.com"
 go. We can use that Dockerfile to build a new image with the **docker image build** command. The **--tag** command is a useful option to pass to docker build that lets us specify the name of our new image followed by a version number
 
 End the command with a single '.'(dot) so it knows to look for the Dockerfile in the same folder that the command is run in.
+
+```Docker
+
+  docker image build --tag image_name .
+  docker image build --tag web-server:1.0 .
+
+```
+
 
 **docker image ls** command is used to see all the docker images
 
