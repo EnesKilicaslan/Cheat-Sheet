@@ -135,11 +135,37 @@ public TennisCoach(FortuneService theFs) {
 ```
 
 
+#### Setter Injection:
+Again just simply put ***@Autowired*** annotation to the method. And the name of the method does not matter, it can be anything.
+
+```Java
+@Autowired
+public void setFortune(FortuneService theFs) {
+	this.fs = theFs;
+}
+
+```
+
+
+### Field Injection:
+We can inject dependencies by setting field values, and this is accomplished by using ***Java Reflection***.
+
+set the field directly with annotation. No need for setter method even if it would be private.
 
 
 
 
 
+## Scope with annotation:
+
+Use ***@Scope*** annotation to specify a scope for a bean.
+
+1. Singleton: ***@Scope("singleton")***
+2. Prototype: ***@Scope("prototype")***
+
+## Lifecycle methods with annotation:
+
+Use annotations ***@PostConstruct*** and ***@PreDestroy***.
 
 
 
