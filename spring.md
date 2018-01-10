@@ -156,19 +156,48 @@ set the field directly with annotation. No need for setter method even if it wou
 
 
 
-## Scope with annotation:
+### Scope with annotation:
 
 Use ***@Scope*** annotation to specify a scope for a bean.
 
 1. Singleton: ***@Scope("singleton")***
 2. Prototype: ***@Scope("prototype")***
 
-## Lifecycle methods with annotation:
+### Lifecycle methods with annotation:
 
 Use annotations ***@PostConstruct*** and ***@PreDestroy***.
 
 
+## Spring Configuration with Java Code:
 
+Instead of configuring Spring container using XML, configure it using Java code.
+
+Need to use ***@Configuration*** and ***@Bean*** annotations.
+define methods to expose bean, the method name will be the bean id.
+
+```Java
+package com.kilicaslan.enes;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+//@ComponentScan("com.kilicaslan.enes")
+public class CoachConfig {
+	@Bean
+	public FortuneService fortuneService() {
+		return new SadFortuneService();
+	}
+
+	@Bean
+	public Coach swimCoach() {
+		return new SwimCoach(fortuneService());
+	}
+
+}
+
+```
 
 
 
