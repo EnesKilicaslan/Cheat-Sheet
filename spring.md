@@ -3,7 +3,7 @@
 ## Spring Inversion of Control
 
 --------
-** Two primary functions of Spring Container:**
+**Two primary functions of Spring Container:**
 
 1. Inversion of Control: Create and manage objects
 2. Dependency injection: Inject object's dependencies
@@ -198,6 +198,70 @@ public class CoachConfig {
 }
 
 ```
+
+
+
+## Spring MVC
+
+***@Controller*** annotation is inherited from ***@Component*** annotation.
+
+- ***@RequestMapping*** annotation maps url to the corresponding method
+- you can use ***request.getParameter("studentName");*** to read form data
+
+```Java
+@Controller
+public class HelloWorldController {
+
+	@RequestMapping("/showForm")
+	public String showForm() {
+		return "helloworld-form";
+	}
+
+	@RequestMapping("/processForm")
+	public String processForm() {
+		return "helloworld";
+	}
+
+  @RequestMapping("/processFormTwo")
+	public String processsFormTwo(HttpServletRequest request, Model model) {
+
+		String name = request.getParameter("studentName");
+
+		name = name.toUpperCase();
+		name += " 1984";
+
+		model.addAttribute("new_name", name);
+
+		return "helloworld";
+	}
+}
+
+```
+
+***@RequestParam*** annotation directly binds form data to variable.
+
+```Java
+@RequestMapping("/processFormThree")
+	public String processsFormThree(
+      @RequestParam("studentName") String name,
+      Model model) {
+
+  ...
+
+}
+
+```
+
+*You can use Controller level mapping to create a sub urls.*
+
+In order to use Spring MVC form tags, we need to send the model to the form.
+
+
+
+
+
+
+
 
 
 
