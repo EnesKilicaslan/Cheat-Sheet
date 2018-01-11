@@ -255,15 +255,63 @@ public class HelloWorldController {
 *You can use Controller level mapping to create a sub urls.*
 
 In order to use Spring MVC form tags, we need to send the model to the form.
+The following line imports spring tags for html
+
+```html
+<%@ taglib  prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+```
 
 
 
+Then you can create form like the following in the jsp file
+
+```html
+<form:form action="processForm" modelAttribute="student">
+			First Name: <form:input path="firstName" />
+			<br/><br/>
+
+			Last Name:  <form:input path="lastName" />
+			<br/><br/>
+
+			Country:
+				<form:select path="country">
+					<form:option value="BRA" label="brazil"/>
+					<form:option value="TR" label="turkey"/>
+					<form:option value="USA" label="amerika"/>
+				</form:select>
+
+			<input type="submit" value="Submit" />
+		</form:form>
+
+```
 
 
+in order to read form options from a properties file, we need to add configuration for util.
 
+and then add the file to the xml configuration file like the following.
 
+```html
+<util:properties id="countryOptions" location="classpath:../countries.properties" />
+```
 
+And then you can inject the elements in the controller like following
 
+```Java
+@Value("#{countryOptions}")
+private LinkedHashMap<String, String> countryOptions;
+```
+
+Radio buttons are represented by form:radiobutton tags
+
+Following is example of radio buttons in Spring MVC
+```html
+Java: <form:radiobutton path="favoriteLanguage" value="Java"/>
+Python: <form:radiobutton path="favoriteLanguage" value="Python"/>
+Ruby: <form:radiobutton path="favoriteLanguage" value="Ruby"/>
+```
+
+There is a field in Student Class named favoriteLanguage, and when the user submits the form Spring MVC will call setFavoriteLanguage method automatically.
 
 
 
