@@ -314,6 +314,154 @@ Ruby: <form:radiobutton path="favoriteLanguage" value="Ruby"/>
 There is a field in Student Class named favoriteLanguage, and when the user submits the form Spring MVC will call setFavoriteLanguage method automatically.
 
 
+## Spring MVC Validation Rules
+
+you can use various annotations for Validation.
+
+The following annotations are added to the class field
+
+```Java
+@NotNull(message="required")
+@Size(min=1)
+private String lastName;
+```
+
+- you can check if the form pass validations like in the following.
+- BindingResult must come right after @Valid attribute
+
+```Java
+@RequestMapping("/processForm")
+public String processForm(
+		@Valid @ModelAttribute("customer") Customer customer,
+		BindingResult bindingResult) {
+
+	System.out.println(customer.getLastName());
+
+	if( bindingResult.hasErrors())
+		return "customer-form";
+	else
+		return "customer-confirmation";
+}
+```
+
+But now we have whitespace problem.
+
+To solve this problem there is an annotation @InitBinder .
+This works like preprocessor, e.i. it basically preprocess all requests coming in our controller.
+
+Method signature is always same, takes WebDataBinder as argument.
+
+```Java
+@InitBinder
+public void initBinder(WebDataBinder dataBinder) {
+	StringTrimmerEditor trimmer = new StringTrimmerEditor(true);
+	dataBinder.registerCustomEditor(String.class, trimmer);
+}
+```
+
+We can validate number ranges with **@Min** and **@Max** annotations, and value parameter is required.
+
+We can even validate a string with regular expression by using **@Pattern** annotation and its regexp parameter.
+
+```Java
+@Min(value = 0, message="number of passes must be greater than zero")
+@Max(value = 10, message="number of passes must be less than 10")
+private int numberOfFreePasses;
+
+@Pattern(regexp="^[a-zA-Z0-9]{5}", message="wrong format")
+private String postCode;
+```
+
+***Note:*** In order to make an int field required, we can add @NotNull annotation, but this will throw String to int type conversion exception. So we need to use  class type Integer. This will work Because we are running a string trimmer as preprocess with @InitBinder
+
+But this is not enough to validate Integer field, we need to create custom message. To make it work we need to create a properties file which includes custom messages
+
+```
+file: messages.properties
+
+typeMismatch.customer.numberOfFreePasses=Invalid Number
+```
+We can find the related error by printing bindingResult.
+
+Here;
+- **typeMismatch:** error type
+- **customer:** object name
+- **numberOfFreePasses:** is field name
+
+### How to create custom validation rules
+
+Here we basically create our own annotation.
+  1. create custom annotation
+  2. create constraint validator
+
+To create annotation use **@interface** notation.
+
+```Java
+package com.kilicaslan.enes.mvc.validation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import javax.validation.Constraint;
+import javax.validation.Payload;
+
+@Constraint(validatedBy = CourseCodeConstraintValidator.class)
+@Target( {ElementType.FIELD, ElementType.METHOD } )
+@Retention(RetentionPolicy.RUNTIME)
+public @interface CourseCode {
+
+	public String value() default "LUV";
+
+	public String message() default "must start with LUV";
+
+
+	public Class<?>[ ] groups() default {};
+
+	public Class<? extends Payload> [] payload() default {};
+
+}
+```
+
+```Java
+package com.kilicaslan.enes.mvc.validation;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+public class CourseCodeConstraintValidator implements ConstraintValidator<CourseCode, String> {
+
+	private String prefix;
+
+	@Override
+	public void initialize(CourseCode arg0) {
+		prefix = arg0.value();
+	}
+
+	@Override
+	public boolean isValid(String theCode, ConstraintValidatorContext arg1) {
+
+		if( theCode != null)
+			return theCode.startsWith(prefix);
+		return false;
+	}
+
+
+}
+```
+
+Now you can use the validation annotation like the following
+
+```java
+@CourseCode(value="CENG", message="Must start with CENG")
+private String courseCode;
+
+```
+
+
+
+
 
 
 *********************
