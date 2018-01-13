@@ -1,4 +1,4 @@
-# Cheet-Sheet
+# Cheat-Sheet
 
 
 This Repo contains my cheatsheets
