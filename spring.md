@@ -447,7 +447,6 @@ public class CourseCodeConstraintValidator implements ConstraintValidator<Course
 		return false;
 	}
 
-
 }
 ```
 
@@ -459,9 +458,92 @@ private String courseCode;
 
 ```
 
+## Hibernate
+
+Hibernate uses JDBC behind the scenes.
+
+In order to run hibernate, we must have correctly running mysql database and all necessary jar files added to class path.
+
+Steps:
+1. Add Hibernate configuration file
+2. Annotate Java Class
+3. Develop Java Code to perform database operations
+
+Configuration file basically tells Hibernate how to connect to database. Because of that we put JDBC url to the configuration file.
+
+Example basic configuration file for Hibernate:
+
+```XML
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <!-- JDBC Database connection settings -->
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/hb_student_tracker?useSSL=false</property>
+        <property name="connection.username">hbstudent</property>
+        <property name="connection.password">hbstudent</property>
+
+        <!-- JDBC connection pool settings ... using built-in test pool -->
+        <property name="connection.pool_size">1</property>
+
+        <!-- Select our SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Echo the SQL to stdout -->
+        <property name="show_sql">true</property>
+
+		<!-- Set the current session context -->
+		<property name="current_session_context_class">thread</property>
+
+    </session-factory>
+
+</hibernate-configuration>
+
+```
 
 
+Hibernate has a concept of entity class.
+**entity class** is a Java class that is mapped to a database table.
 
+
+in order to map a class to a database table and its fields to columns, we can uses annotations like @Entity, @Table, @Column.
+
+@Id is used for primary key.
+
+***javax persinstant*** API should be used, because it is the standard.
+
+Hibernate Example Mapping with annotations:
+```java
+package com.kilicaslan.enes.hibernate.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="student")
+public class Student {
+
+	@Id
+	@Column(name="id")
+	int id;
+
+	@Column(name="first_name")
+	String firstName;
+
+	@Column(name="last_name")
+	String lastName;
+
+	@Column(name="email")
+	String email;
+}
+```
 
 
 *********************
