@@ -546,6 +546,101 @@ public class Student {
 ```
 
 
+To write some code on hibernate, we need to create a hibernate session factory which creates sessions.
+
+***Session Factory:***
+- Reads hibernate config file
+- Creates session objects
+- We create once in our application
+
+***Session:***
+- Wraps a JDBC connection
+- Main objects to save/retrieve objects to DB
+- Retrieve from Session Factory
+
+
+```Java
+// create session factory
+SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
+							.addAnnotatedClass(Student.class)
+              .buildSessionFactory();
+
+// create session
+Session session = factory.getCurrentSession();
+
+
+try {
+
+			// create new Student object
+			System.out.println("Creating new Student Object");
+			Student st =  new Student("Enes", "Kilicaslan" , "eeneskilicaslan@gmail.com");
+
+			// start transaction
+			session.beginTransaction();
+
+			// save the object
+			System.out.println("Saving the student");
+			session.save(st);			
+
+			//commit transaction
+			session.getTransaction().commit();
+			System.out.println("Done!");
+
+} finally {
+
+			factory.close();
+
+		}
+```
+
+
+##### Primary Keys:
+
+There is implicit annotation when we use ***@Id*** annotation, that is ***@GeneratedValue(strategy=GenerationType.IDENTITY)***
+
+###### Sql Note:
+We can reset auto increment value by ***truncate hb_student_tracker.student***
+
+
+We can retrieve an Entity object by using primary key id with **get()** method like following:
+
+```Java
+int id = 1;
+Student mySt =  session.get(Student.class, id);
+
+```
+
+#### Hibernate Query Language:
+
+- similar to sql
+- where, like, order by, join, in, ..etc
+
+We can use this queries like following:
+
+```Java
+students = session
+    .createQuery("from Student s where s.lastName like '%uck'")
+    .list();
+
+System.out.println("\n\nStudents whose last names end with uck:");
+displayStudents(students);
+```
+
+We can update table elements with ***executeUpdate*** method, like in the following example
+
+```Java
+
+session.createQuery("update Student  set firstName='Bomba'"
+ + "where lastName='Kilicaslan'").executeUpdate();
+```
+
+We can delete table elements with ***delete*** method of the session if we can retrieve the corresponding object. If we don't have the object, then we can use ***executeUpdate*** like we did before.
+
+
+
+
+
+
 *********************
 
 ***useful links:***
