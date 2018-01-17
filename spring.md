@@ -639,6 +639,36 @@ We can delete table elements with ***delete*** method of the session if we can r
 
 
 
+## Advanced Mapping:
+
+***One-to-one mapping:*** user -> profile
+
+***One-to-many mapping:*** instructor -> many courses.
+
+***Many-to many mapping:*** many students -> many courses.
+
+
+#### Important Database Concepts:
+
+- Primary Key
+- Foreign key
+- Cascade
+
+
+
+1. Primary Key:
+It is used to identify a unique row in a table.
+
+2. Foreign Key:
+It is a field in one table that refers to primary key in another table. Links tables together
+
+3. Cascade: apply the same operation to the related entities, like Foreign keys.
+
+4. Eager Loading: retrieve everything
+
+5. Lazy Loading: retrieve on request
+
+
 
 
 *********************
@@ -646,6 +676,7 @@ We can delete table elements with ***delete*** method of the session if we can r
 ***useful links:***
 
 - [Spring Documentation Site](https://spring.io)
+
 
 
 *********************
