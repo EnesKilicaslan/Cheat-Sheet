@@ -693,6 +693,9 @@ By default no cascade is configured, we need to specify it. And we can do it wit
 5. Create getter and setters
 6. generate toString
 
+
+#### Unidirectional Mapping
+
 ```Java
 @Entity
 @Table(name="instructor")
@@ -773,6 +776,12 @@ public class CreateDemo {
 	}
 }
 ```
+
+
+#### Bidirectional Mapping
+
+
+
 
 *********************
 
