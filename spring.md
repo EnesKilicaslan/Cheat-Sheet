@@ -669,7 +669,110 @@ It is a field in one table that refers to primary key in another table. Links ta
 5. Lazy Loading: retrieve on request
 
 
+### One to One mapping in Hibernate:
 
+After adding Foreign key to the database we can use ***@OneToOne*** annotation to create a relation with two tables.
+
+##### Entity Lifecycle:
+1. Detach: Entity is not associated with hibernate session.
+2. Merge:  If instance is detached, reattach to the session.
+3. Persist: Transitions new instances to managed stage, next commit/flush will save it in db.
+4. Remove: Transitions managed entity to be removed, next commit/flush will delete it from db.
+5. Refresh: Reload/Synch object with data from db, prevents stale data.
+
+
+***Note:***
+By default no cascade is configured, we need to specify it. And we can do it with ***@OneToOne(cascade=CascadeType.ALL)***, here all means all of the cascade types; i.e save, remove, refresh, detach and merge.
+
+
+***Steps need to Remember! to create Entity class:***
+1. Annotate the class as entity and map to db table
+2. define  fields
+3. annotate the fields with column names in db table
+4. Create constructors
+5. Create getter and setters
+6. generate toString
+
+```Java
+@Entity
+@Table(name="instructor")
+public class Instructor {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	private int id;
+
+	@Column(name="first_name")
+	private String firstName;
+
+	@Column(name="last_name")
+	private String lastName;
+
+	@Column(name="email")
+	private String email;
+
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="instructor_detail_id")
+	private InstructorDetail instructorDetail;
+
+}
+
+```
+
+
+```java
+@Entity
+@Table(name="instructor_detail")
+public class InstructorDetail {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	private int id;
+
+	@Column(name="youtube_channel")
+	private String youtubeChannel;
+
+	@Column(name="hobby")
+	private String hobby;
+}
+```
+
+
+```java
+public class CreateDemo {
+	public static void main(String[] args) {
+
+		// create session factory
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
+									.addAnnotatedClass(Instructor.class).
+									addAnnotatedClass(InstructorDetail.class)
+									.buildSessionFactory();
+
+		// create session
+		Session session = factory.getCurrentSession();
+
+
+		try {
+			// create object
+			Instructor enes = new Instructor("black", "white", "eeneskilicaslan@gmai.com"
+											, new InstructorDetail("youtube", "love code"));
+
+			// start transaction
+			session.beginTransaction();
+			session.save(enes);
+
+			//commit transaction
+			session.getTransaction().commit();
+			System.out.println("Done!");
+
+		} finally {
+			factory.close();
+		}
+	}
+}
+```
 
 *********************
 
