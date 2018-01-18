@@ -780,6 +780,68 @@ public class CreateDemo {
 
 #### Bidirectional Mapping
 
+- No need to change database.
+- We need to use ***@MappedBy*** annotation.
+
+***Note:*** We can solve connection polling leak issue by closing session. It is always safer to check the null pointer exception.
+
+```Java
+@Entity
+@Table(name="instructor")
+public class Instructor {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	private int id;
+
+	@Column(name="first_name")
+	private String firstName;
+
+	@Column(name="last_name")
+	private String lastName;
+
+	@Column(name="email")
+	private String email;
+
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="instructor_detail_id")
+	private InstructorDetail instructorDetail;
+}
+```
+
+```Java
+@Entity
+@Table(name="instructor_detail")
+public class InstructorDetail {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	private int id;
+
+	@Column(name="youtube_channel")
+	private String youtubeChannel;
+
+	@Column(name="hobby")
+	private String hobby;
+
+	// to make bi-directional possible, create the field
+	@OneToOne(mappedBy="instructorDetail", cascade=CascadeType.ALL)
+	private Instructor instructor;
+
+	public Instructor getInstructor() {
+		return instructor;
+	}
+
+	public void setInstructor(Instructor instructor) {
+		this.instructor = instructor;
+	}
+}
+```
+
+
+
 
 
 
