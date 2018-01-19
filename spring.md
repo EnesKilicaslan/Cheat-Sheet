@@ -840,8 +840,58 @@ public class InstructorDetail {
 }
 ```
 
+### One To Many Mapping
+Almost same with the one-to-one mapping, but this time we need to define a list of entities that is many.
 
+```Java
+@Entity
+@Table(name="instructor")
+public class Instructor {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	private int id;
+
+	@Column(name="first_name")
+	private String firstName;
+
+	@Column(name="last_name")
+	private String lastName;
+
+	@Column(name="email")
+	private String email;
+
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="instructor_detail_id")
+	private InstructorDetail instructorDetail;
+
+	@OneToMany(mappedBy="instructor",
+			   cascade= {CascadeType.REFRESH, CascadeType.MERGE,
+					   	 CascadeType.PERSIST, CascadeType.DETACH})
+	List<Course> courses;
+}
+```
+
+```Java
+@Entity
+@Table(name="course")
+public class Course {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	private int id;
+
+	@Column(name="title")
+	private String title;
+
+	@ManyToOne(cascade= {
+	CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH})
+	@JoinColumn(name="instructor_id")
+	private Instructor instructor;
+}
+```
 
 
 
