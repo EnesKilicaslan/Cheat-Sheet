@@ -894,6 +894,82 @@ public class Course {
 ```
 
 
+## Fetch Types: Eager and Lazy Loading:
+
+***Eager Loading:*** will load all the dependent entities.
+
+
+***Lazy Loading:*** will load the main entity first, and load dependend entities on demand.
+
+When we define the mapping relationship, we can specify the fetch type lazy or eager.
+
+
+
+```Java
+@Entity
+@Table(name="instructor")
+public class Instructor {
+
+	....
+
+	@OneToMany(
+              fetch=FetchType.LAZY,
+              mappedBy="instructor",
+              cascade= {CascadeType.REFRESH, CascadeType.MERGE,
+					   	 CascadeType.PERSIST, CascadeType.DETACH})
+	List<Course> courses;
+
+  ...
+}
+```
+
+
+***Default Fetch Types:***
+
+- @OneToOne   -->  EAGER
+- @OneToMany  -->  LAZY
+- @ManyToOne  -->  EAGER
+- @ManyToMany -->  LAZY
+
+
+For Lazy loading Hibernate needs an open session to retrieve data at a later time.
+
+Options
+1. call getter method while session is open
+2. HQL fetch join demo, we can create a query before closing the session like following:
+
+```Java
+try {
+			// create object
+			int id = 1;
+
+			// start transaction
+			session.beginTransaction();
+
+			Query<Instructor> query =
+					session.createQuery("select i from Instructor i "
+							+ "JOIN FETCH i.courses "
+							+ "where i.id=:instructorId", Instructor.class);
+
+			query.setParameter("instructorId", id);
+
+			Instructor instructor = query.getSingleResult();
+			session.getTransaction().commit();
+
+			session.close();
+
+			System.out.println("enes Instructor: " + instructor);
+			System.out.println("enes Courses: " + instructor.getCourses());
+
+			//commit transaction
+			System.out.println("enes Done!");
+
+} finally {
+			//session.close();
+			factory.close();
+		}
+```
+
 
 *********************
 
