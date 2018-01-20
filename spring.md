@@ -682,7 +682,7 @@ After adding Foreign key to the database we can use ***@OneToOne*** annotation t
 
 
 ***Note:***
-By default no cascade is configured, we need to specify it. And we can do it with ***@OneToOne(cascade=CascadeType.ALL)***, here all means all of the cascade types; i.e save, remove, refresh, detach and merge.
+By default no cascade is configured, we need to specify it. And we can do it with @OneToOne(cascade=CascadeType.ALL), here all means all of the cascade types; i.e save, remove, refresh, detach and merge.
 
 
 ***Steps need to Remember! to create Entity class:***
@@ -998,6 +998,7 @@ public class Course {
 }
 ```
 
+### Many To Many Unidirectional:
 
 
 
@@ -1007,7 +1008,7 @@ public class Course {
 
 - [Spring Documentation Site](https://spring.io)
 
-
+- [Entity relationship write-up](http://www.kumaranuj.com/2013/05/jpa-2-understanding-relationships.html?view=sidebar)
 
 *********************
 
