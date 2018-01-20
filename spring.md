@@ -967,8 +967,38 @@ try {
 } finally {
 			//session.close();
 			factory.close();
-		}
+}
 ```
+
+### One To Many Unidirectional:
+
+Source entity contains @JoinColumn annotation.
+
+```java
+@Entity
+@Table(name="course")
+public class Course {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	private int id;
+
+	@Column(name="title")
+	private String title;
+
+
+	@OneToMany(fetch=FetchType.LAZY,
+			   cascade= CascadeType.ALL)
+	@JoinColumn(name="course_id")
+	private List<Review> reviews;
+
+  ...
+
+}
+```
+
+
 
 
 *********************
