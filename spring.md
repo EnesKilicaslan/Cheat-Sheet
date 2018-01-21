@@ -998,7 +998,77 @@ public class Course {
 }
 ```
 
-### Many To Many Unidirectional:
+### Many To Many:
+
+Lets think course and student.
+- A course can have many students
+- A student can have many courses.
+
+We need to keep track of which student is in which course and vice versa. What we can do is Join Table.
+
+**Join Table:** A table that provides mapping between two tables. It has Foreign Keys for each table to define those mapping. To make it possible in Hibernate, we use @JoinTable annotation.
+
+```Java
+
+@Entity
+@Table(name="course")
+public class Course {
+  ...
+
+  @ManyToMany(fetch=FetchType.LAZY,
+				cascade= {
+						CascadeType.REFRESH, CascadeType.MERGE,
+						CascadeType.PERSIST, CascadeType.DETACH
+						})
+	@JoinTable(
+			name="course_student",
+			joinColumns= @JoinColumn(name="course_id"),
+			inverseJoinColumns= @JoinColumn(name="student_id")
+			)
+
+```
+
+
+```Java
+
+@Entity
+@Table(name="student")
+public class Student {
+	...
+
+	@ManyToMany(
+		fetch=FetchType.LAZY,
+		cascade= {
+				CascadeType.REFRESH, CascadeType.MERGE,
+				CascadeType.PERSIST, CascadeType.DETACH
+				})
+	@JoinTable(
+		name="course_student",
+		joinColumns= @JoinColumn(name="student_id"),
+		inverseJoinColumns= @JoinColumn(name="course_id")
+		)
+	private List<Course> courses;
+
+  ...
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
