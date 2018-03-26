@@ -93,11 +93,12 @@ git push -u origin master
 
 ------------------------
 
-When we work with others and they made commits and pushed to github, we can pull down new changes by running
-**git pull origin master**
+When we work with others and they made commits and pushed to github, we can pull down new changes by running.
+```sh
+git pull origin master
+```
 
-**git stash:**
-Sometimes when you go to pull you may have changes you don't want to commit just yet. One option you have, other than commiting, is to stash the changes.
+**git stash: Sometimes when you go to pull you may have changes you don't want to commit just yet. One option you have, other than commiting, is to stash the changes.**
 
 Use the command ***'git stash'*** to stash your changes, and ***'git stash apply'*** to re-apply your changes after your pull.
 
@@ -109,7 +110,17 @@ You can unstage files by using the git reset command
 
 ***git reset octofamily/octodog.txt***
 
+------------------------
 
+To create a new branch named "feature_x" and switch to it using
+```sh
+git checkout -b feature_x
+```
+
+To delete the branch again
+```sh
+git branch -d feature_x
+```
 
 
 
