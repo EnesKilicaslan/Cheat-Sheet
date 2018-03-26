@@ -98,4 +98,12 @@ The ***HEAD*** is a pointer that holds your position within all your different c
 
 
 
+**Useful links:**
+
+- [The Simple Guide](http://rogerdudler.github.io/git-guide/)
+- [A Visual Git Reference](http://marklodato.github.io/visual-git-guide/index-en.html)
+- [Think like git](http://think-like-a-git.net/)
+- [Github Help](https://help.github.com/)
+
+
 
