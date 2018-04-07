@@ -168,3 +168,39 @@ TEST_CASE("This is a test case") {
 }
 ```
 
+
+### Behaviour Driven Development
+
+In BDD, instead of text cases and text fixtures we usually have user stories and scenarios. User stories defined by product owner. And that story is split into scenarios. And scenarios are defined in three parts; **Given** , **When**, **Then**. See the following example
+
+
+```c++
+
+SCENARION("If words are known entering their encoding will return all valid words."){
+
+	GIVEN("Hello is a known word"){
+
+			Engine t9engine;
+			t9engine.learnWords({"Hello"});
+
+			WHEN("Called with the right encoding"){
+					Digit digits= {4,3,3,5,6};
+
+					auto result = t9engine.getwordsbydigits(digits);
+
+					THEN("return hello"){
+
+						REQUIRE(result.size() == 1);
+						REQUIRE(result[0] == "hello");
+						
+					}
+
+			}
+
+	}
+
+}
+
+
+```
+
