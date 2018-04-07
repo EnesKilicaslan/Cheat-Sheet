@@ -73,3 +73,45 @@ TEST_CASE("Find one letter word"){
 ```
 
 **Catch Framework** has the ability for checking exceptions. Keywords are ***REQUIRE_THROWS*** and ***CHECK_THROWS***. And Both can be used in the same manner as corresponding asserion keywords.
+
+
+#### More information to tests:
+
+There are 4 kinds of macros in Catch.
+
+- **INFO:** The message will be reported only if the test fails.
+
+- **WARN:** Similar to INFO, but will always show regardless if the test fails or not.
+
+- **FAIL:** Shows as well as a fail, immediately.
+
+- **CAPTURE:** We can use to log the name of a value of a variable and works just like INFO.
+
+
+Example:
+```c++
+INFO("Passed first step");
+INFO("Customer name is: " << customer.get_name());
+
+CAPTURE(someVarialbe); // someVariable := 3
+```
+
+To compare complex objects (i.e class types) you need to overload comparator operator, *==*. Or you can write toString method in the namespace Catch. But the values aren't shown exactly, instead you see a question mark. To be able to see each of the fields of the object, we need to overload the operator **
+
+```c++
+
+class SomeClass {
+	public:
+		int my_int;
+		double my_double;
+
+}
+
+
+TEST_CASE("Test name"){
+
+	REQUIRE(result == expected);
+}
+
+```
+
