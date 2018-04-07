@@ -115,3 +115,56 @@ TEST_CASE("Test name"){
 
 ```
 
+
+## Code Duplication in Automated Tests
+
+**unit test:** test a single unit of work. They are focused, isolated, fast.
+
+**integration test:** test in externalized enviroment. We can test DB, services and so on. They are extensive, slower and depends on enviroment.
+
+
+***DRY:*** Don't repeat yourself.
+***DAMP:*** Descriptive and meaningful phrases.
+
+
+We can test a class with **TEST_CASE_METHOD** keyword, and they are called fixtures.
+
+```c++
+class MyFixture {
+
+	MyFixture(){}
+	~MyFixture(){}
+};
+
+TEST_CASE_METHOD(MyFixture, "Test name"){
+
+	....
+}
+```
+
+
+***Disadvantages of Fixtures:*** Hard to read and understand, difficult to fix failures, hides some of the test logic (especially in the constructor).
+
+
+Better way of testing is using **SECTION**s. They reside inside the test.
+
+Each section is a fork in which the code runs as a separate test, but following the common parts before or with the common parts after that specific section. For example, in the following code section 1 and 2 run the same initialization code.
+
+
+```c++
+
+TEST_CASE("This is a test case") {
+
+	// initialization
+
+
+	SECTION("Test section 1"){
+		// test code
+	}
+
+	SECTION("Test section 2"){
+		// test code
+	}
+}
+```
+
