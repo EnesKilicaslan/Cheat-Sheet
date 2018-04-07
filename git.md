@@ -122,7 +122,7 @@ To delete the branch again
 git branch -d feature_x
 ```
 
-
+------------------------
 
 
 **Useful links:**
