@@ -1,0 +1,4 @@
+# Node JS
+
+- Node.JS is wrapper or coordinator araound V8 (or other JS engine) with build in modules providing rich features.
+- we can access envirement variables by process object ```process.env.[varibale_name]```
