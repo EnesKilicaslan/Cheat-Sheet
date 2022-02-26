@@ -2,3 +2,13 @@
 
 - Node.JS is wrapper or coordinator araound V8 (or other JS engine) with build in modules providing rich features.
 - we can access envirement variables by process object ```process.env.[varibale_name]```
+- **module**: means a file containing Javascript codes. 
+- Node wraps each file with a function, indead this makes the file a module.
+- the wrapping function signature is ```function( exports, module, require, __filename, __dirname)```
+- the function returns **module.exports** automatically, no need to specify a return value
+- the first argument **exports** is alias to **module.exports**, so Node is calling the function like (module.exports, module, ...)
+- exports is okay with simple objects, so we can specify some properties but it should not be reassigned
+- anything except from **global** is local and we should avoid using global object.
+- in order to get rid of callback hell, we can use **promisfy** function of **util** module. For example: ```const readFile = util.promisfy(fs.readFile)
+- some modules like **fs** has build-in promise support, we can use it like ```const {readFile} require('fs').promises```
+- Node's event emitter library is useful one. we can use **.emit** and **.on** methods to fire and catch an event 
