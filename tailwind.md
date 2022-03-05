@@ -1,3 +1,7 @@
 # Tailwind CSS
 
-- gives tons of utility classes 
+- gives tons of  utility classes
+- utility classes are low level, so do single job instead of craeting styled component like in bootstrap
+- **text color:** text-{color}-{strength} - text-red-500
+- **text size:**  text-{size-info} - text-2xl
+- **font weight:** font-{weight-info} - font-bold
