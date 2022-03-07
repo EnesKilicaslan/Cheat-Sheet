@@ -5,3 +5,4 @@
 - **text color:** text-{color}-{strength} - text-red-500
 - **text size:**  text-{size-info} - text-2xl
 - **font weight:** font-{weight-info} - font-bold
+- instead of changing default properties, we should add our custom variables in **tailwind.config.js** file
