@@ -21,14 +21,11 @@ router.push("/")
 router.replace("/") // replace history
 ```
 
-
-
-
-- Pre-rendering is generating HTML with its content in the server prior to send it to the client.
+**Pre-rendering is generating HTML with its content in the server prior to send it to the client.**
   - static generation
   - server side rendering
 
-## static generation
+### static generation
 
 The HTML is generated at build time and is reused on each request. Static generation can be done with or without data.
 Page can be built once, cached by a CDN and served almost instantly.
