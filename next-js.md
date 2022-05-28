@@ -1,5 +1,29 @@
 
 
+## catch-all routes
+
+filename should be [...params].js to capture all sub-routes
+
+## navigation
+Link component should be used as following for client side navigation
+
+<Link href="" >
+  <a>...</a>
+</Link>
+
+replace prop will replace history instead of adding
+
+we can navigate to a page programatically by using push method of router hook
+
+```
+router.push("/")
+
+router.replace("/") // replace history
+```
+
+
+
+
 - Pre-rendering is generating HTML with its content in the server prior to send it to the client.
   - static generation
   - server side rendering
