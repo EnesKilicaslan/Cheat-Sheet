@@ -44,6 +44,33 @@ any link component in the viewport will be pre-fetched by default for pages usin
 When navigating to the link component from another compoennt, the page is generated on client side using javascript and pre-fetched JSON data.
 If you navigate to the page directly, html page is fetched.
 
-`getStaticPaths` is required for dynamic static site generation
+*when we have a child  that does not have a as child in the link component, we pass passHref prop*
+
+- `getStaticPaths` is required for static site generation with  dynamic path pages, for example: "posts/[postId]"
+- `getStaticPaths` is used to inform Next.JS what are the possible values for the dynamic path would be.
+- It returns an object which contains a key paths which itself is an array of objects
+
+for example:
+```
+
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { postId: '1' } },
+      { params: { postId: '2' } },
+      { params: { postId: '3' } },
+      { params: { postId: '4' } },
+      { params: { postId: '5' } }
+    ],
+    fallback: false
+  }
+}
+```
+
+- `fallback: false` means display 404 page if the path is not in the list of `getStaticPaths`
+- `fallback: true` don't display 404 page. instead it will serve a fallback version of the page by running `getStaticProps` which generates html and json for the path.
+   Next.js keeps track of new rendered pre-rendered list of pages and subsequent call will result the same page
+   
+- 
 
 
