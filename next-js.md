@@ -69,8 +69,8 @@ export async function getStaticPaths() {
 
 - `fallback: false` means display 404 page if the path is not in the list of `getStaticPaths`
 - `fallback: true` don't display 404 page. instead it will serve a fallback version of the page by running `getStaticProps` which generates html and json for the path.
-   Next.js keeps track of new rendered pre-rendered list of pages and subsequent call will result the same page
-   
-- 
+   Next.js keeps track of new rendered pre-rendered list of pages and subsequent call will result the same page 
+- `fallback: blocking` is really the same `true` except from first page load. The pages that have not been generated at build time don't display 404 page as in the case of `true`. however the page does not return immediatly the code block for `isFallback` (i.e loading indicator ) but generates the page on server and returns the whole page.
+- `fallback: blocking` is mainly created for the crawlers that does not support Javascript. 
 
 
