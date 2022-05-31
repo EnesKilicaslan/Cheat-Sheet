@@ -74,3 +74,13 @@ export async function getStaticPaths() {
 - `fallback: blocking` is mainly created for the crawlers that does not support Javascript. 
 
 
+#### pros
+- pre-rendered static pages can be pushed to a CDN and served to clients across glob almost instantly
+- static content is better for SEO
+
+#### cons
+- the build time is proportional to the number of pages
+- a page, once generated, can contain stale data  
+
+**ISR (Incremental Static Rendering)** solves stale data problem without re-building the entire app
+
