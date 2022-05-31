@@ -86,3 +86,7 @@ export async function getStaticPaths() {
 
 **ISR** can be applied to a page by specifying the **revalidate** key (which is in seconds) in the `getStaticProps` function
 
+
+### Server Side Rendering
+
+pre-render a page not at build time but at request time, HTML is generated for every incoming request. ( it is usefull for fetching personalized data and keeping in mind SEO ) 
