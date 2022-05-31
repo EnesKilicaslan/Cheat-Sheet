@@ -84,3 +84,5 @@ export async function getStaticPaths() {
 
 **ISR (Incremental Static Rendering)** solves stale data problem without re-building the entire app
 
+**ISR** can be applied to a page by specifying the **revalidate** key (which is in seconds) in the `getStaticProps` function
+
