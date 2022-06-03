@@ -89,4 +89,7 @@ export async function getStaticPaths() {
 
 ### Server Side Rendering
 
-pre-render a page not at build time but at request time, HTML is generated for every incoming request. ( it is usefull for fetching personalized data and keeping in mind SEO ) 
+- pre-render a page not at build time but at request time, HTML is generated for every incoming request. ( it is usefull for fetching personalized data and keeping in mind SEO ) 
+- `getServerSideProps` function is used for server side rendering. it returns an object that contains `props` key which is again an object
+- `getServerSideProps` never runs on client side.
+- `getServerSideProps` has access to request, response and query objects unlike `getStaticProps`
