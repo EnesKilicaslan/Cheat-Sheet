@@ -93,3 +93,16 @@ export async function getStaticPaths() {
 - `getServerSideProps` function is used for server side rendering. it returns an object that contains `props` key which is again an object
 - `getServerSideProps` never runs on client side.
 - `getServerSideProps` has access to request, response and query objects unlike `getStaticProps`
+
+Next.JS also allows for client side data fetching. For private (behind login screen), highly user specific and no SEO required pages client side data fetching is more suitable.
+Client side data fetching is exactly the same as React.JS, we make the `fetch` request in `useEffect` hook.
+`SWR` is a hook for data fetching suggested by Next.JS 
+
+
+
+
+
+
+
+
+
