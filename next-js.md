@@ -98,10 +98,7 @@ Next.JS also allows for client side data fetching. For private (behind login scr
 Client side data fetching is exactly the same as React.JS, we make the `fetch` request in `useEffect` hook.
 `SWR` is a hook for data fetching suggested by Next.JS 
 
-
-
-
-
+- We can combine SSR and client side fetching ( for example, we can use client side fetching for filtering/searching) and shallow routing can be used to change the url on the browser.
 
 
 
