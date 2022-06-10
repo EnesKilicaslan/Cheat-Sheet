@@ -100,6 +100,7 @@ Client side data fetching is exactly the same as React.JS, we make the `fetch` r
 
 - We can combine SSR and client side fetching ( for example, we can use client side fetching for filtering/searching) and shallow routing can be used to change the url on the browser.
 
-
+##### sitemap.xml generation tutorial
+https://cheatcode.co/tutorials/how-to-generate-a-dynamic-sitemap-with-next-js
 
 
