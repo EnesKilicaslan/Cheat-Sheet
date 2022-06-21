@@ -104,3 +104,13 @@ Client side data fetching is exactly the same as React.JS, we make the `fetch` r
 https://cheatcode.co/tutorials/how-to-generate-a-dynamic-sitemap-with-next-js
 
 
+## API ROUTES 
+
+Next.JS is fullstack framework. we can create api folder within the pages folder.
+
+we can access the endpoint by navigating the /api URL with the correct file structure.
+
+in the file there should be a default exported function
+
+```request.method``` is used to identify 
+
