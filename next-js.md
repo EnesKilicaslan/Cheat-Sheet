@@ -27,6 +27,8 @@ router.replace("/") // replace history
 
 ## static generation
 
+If we want to render 404 page, we can return {notFound: true} in the getStaticProps or getServerSideProps functions.
+
 ### Static Site Generation
 
 The HTML is generated at build time and is reused on each request. Static generation can be done with or without data.
@@ -112,5 +114,10 @@ we can access the endpoint by navigating the /api URL with the correct file stru
 
 in the file there should be a default exported function
 
-```request.method``` is used to identify 
+```request.method``` is used to identify the type of method: (such as GET, POST, DELETE)
+
+catch all routes: [...params]
+catch all routes with optional params: [[...params]]
+
+
 
