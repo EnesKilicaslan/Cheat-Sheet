@@ -119,5 +119,6 @@ in the file there should be a default exported function
 catch all routes: [...params]
 catch all routes with optional params: [[...params]]
 
+calling local api in ``getStaticProps`` or ``getServerSideProps`` is not recommended as it will create another round trip. Instead, we can replicate the same logic within getStaticProps ot getServerSideProps itself. ( We should do code repetition, so we can write the logic in a seperate file and export it)
 
 
