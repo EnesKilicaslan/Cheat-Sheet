@@ -125,3 +125,20 @@ catch all routes with optional params: [[...params]]
 calling local api in ``getStaticProps`` or ``getServerSideProps`` is not recommended as it will create another round trip. Instead, we can replicate the same logic within getStaticProps ot getServerSideProps itself. ( We should do code repetition, so we can write the logic in a seperate file and export it)
 
 
+## STYLING
+
+#### global styles
+
+We can manually edit the ``global.css`` file or we can create another styling file and import it right after the global style in the ``_app.js`` file.
+On the other hand, we can use styles from external libraries by importing it in the ``_app.js`` file.
+
+#### component level styles
+
+It is alse called as Module CSS. We can create a file that starts with the component name and ends with `.module.css`. This way we can directly access the classes as they are JS objects and we can easily avoid name collision with this way.
+
+### sass support
+
+instead of css, we can use scss with Next's default features. First install sass ``yarn add sass`` and name the files with extention ``.scss``.
+
+
+
