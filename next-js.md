@@ -141,4 +141,9 @@ It is alse called as Module CSS. We can create a file that starts with the compo
 instead of css, we can use scss with Next's default features. First install sass ``yarn add sass`` and name the files with extention ``.scss``.
 
 
+## MISCELLANEOUS
+
+### App Layout
+
+We can create common components and include them in the App component. For example, Header and Footer components. If there is a page that we don't want those pages, we can specify `getLayout` property with `PageLayout`.
 
