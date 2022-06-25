@@ -1,4 +1,5 @@
 
+## ROUTING
 
 ## catch-all routes
 
@@ -20,6 +21,8 @@ router.push("/")
 
 router.replace("/") // replace history
 ```
+
+## PRE-RENDERING
 
 **Pre-rendering is generating HTML with its content in the server prior to send it to the client.**
   - static generation
