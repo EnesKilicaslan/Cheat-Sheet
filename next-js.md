@@ -147,3 +147,8 @@ instead of css, we can use scss with Next's default features. First install sass
 
 We can create common components and include them in the App component. For example, Header and Footer components. If there is a page that we don't want those pages, we can specify `getLayout` property with `PageLayout`.
 
+### Head Component
+
+<head> tag is good for SEO. We can use Next's **Head** component to get benefit from <head> tag. We can put <title> and <meta> tags inside of the **Head** Component.
+Next.JS merge and overrides the content of the **Head** component in the App component.
+
