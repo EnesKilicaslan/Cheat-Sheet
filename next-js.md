@@ -152,3 +152,28 @@ We can create common components and include them in the App component. For examp
 <head> tag is good for SEO. We can use Next's **Head** component to get benefit from <head> tag. We can put <title> and <meta> tags inside of the **Head** Component.
 Next.JS merge and overrides the content of the **Head** component in the App component.
 
+### Image Component
+  - can optimize the size
+  - lazy loading
+  - placeholder image, blur version: prevents UI shift
+
+### Absolute Imports
+  we can use absolute paths istead of specifiying relative paths(with lots of '..').
+  in order to do that, we can create ``jsconfig.json`` file and put the following according to the needs
+  
+  ```javascript
+  {
+    'compilerOptions': {
+        'baseUrl': '.',
+        'paths': {
+          '@name/layout': ['components/layout/*']  
+        }
+    }
+  } 
+  ```
+  
+  
+  
+  
+  
+  
