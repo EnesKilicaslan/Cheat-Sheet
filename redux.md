@@ -20,23 +20,17 @@
 - We can create a folder structure according to our needs, one famous is creating a redux folder together with state sub folder and putting all related operations (reducer, action, types) in it.
 
 redux
+```
 --user
-
 ----userTypes
-
 ----userActions
-
 ----userReducers
 
-
-
 --cake
-
 ----cakeTypes
-
 ----cakeActions
-
 ----cakeReducers
+```
 
 - `react-redux` library gives us a `Provider` component that provides the state to the react app.
 
