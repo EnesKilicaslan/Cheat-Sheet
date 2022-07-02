@@ -21,13 +21,21 @@
 
 redux
 --user
+
 ----userTypes
+
 ----userActions
+
 ----userReducers
 
+
+
 --cake
+
 ----cakeTypes
+
 ----cakeActions
+
 ----cakeReducers
 
 - `react-redux` library gives us a `Provider` component that provides the state to the react app.
