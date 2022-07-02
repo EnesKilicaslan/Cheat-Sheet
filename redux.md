@@ -19,13 +19,12 @@
 - The core concept holds true for a React application as well.
 - We can create a folder structure according to our needs, one famous is creating a redux folder together with state sub folder and putting all related operations (reducer, action, types) in it.
 
-redux
 ```
+redux
 --user
 ----userTypes
 ----userActions
 ----userReducers
-
 --cake
 ----cakeTypes
 ----cakeActions
