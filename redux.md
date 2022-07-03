@@ -11,7 +11,7 @@
 - Instead of extending switch case for each type of action, creating multiple reducers might be more feasible
 - To combine multiple reducers into a single reducer "redux" package offers `combineReducers` function
 - Middleware allows us to extend redux with custom functionality, such as logging, performing async tasks. It applys to the point between dispatching an action and the moment it reaches the reducer. There is `applyMiddleware` function that takes the function for the specific task.
-- `redux-thunk` middleware enables action creator funtion to return an function instead of an action.
+- `redux-thunk` middleware enables action creator funtion to return another function instead of an action.
 
 
 ## React-Redux
@@ -50,7 +50,7 @@ function App () {
 }
 ```
 - Once we provide the store to the React application, we can get and change the state within any component in the react application.
-- 'react-redux' library provides `connect` HOC, we wrap our component with our own `mapStateToProps` and `mapDispatchToProps` as show below
+- 'react-redux' library provides `connect` HOC, we wrap our component with our own `mapStateToProps` and `mapDispatchToProps` as show below. By doing so, we can get state and dispatch an action from the component
 ```javascript
 import React from 'react'
 import { connect } from 'react-redux'
@@ -83,5 +83,72 @@ export default connect(
 )(CakeContainer)
 ```
 
+- React Hooks can be used to access the state and dispatch action instead of HOC
+- `useSelector` hook is equivalent of `mapStateToProps` function
+- `useDispatch` hook is almost equivalent of `mapDispatchToProps` funciton, it gives use the `dispatch` function itself
+- `mapStateToProps` function can take second parameter, named ownProps as convention. The second parameter is the props that has already been passed to the component and it is used for conditional mapping.
+- `mapStateToProps` function can take second parameter, named ownProps as convention. Similar usage as in `mapStateToProps`
+- if we only want to dispatch actions but not to subscribe to the state changes, then we can pass `null` instead of `mapStateToProps` to the connect function.
+- store can be created with redux-thunk middleware as following
+```javascript
+import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import thunk from 'redux-thunk'
 
+import rootReducer from './rootReducer'
+
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+)
+
+export default store
+```
+
+- async action can be created as shown folowing
+```javascript
+import axios from 'axios'
+import {
+  FETCH_USERS_REQUEST,
+  FETCH_USERS_SUCCESS,
+  FETCH_USERS_FAILURE
+} from './userTypes'
+
+export const fetchUsers = () => {
+  return (dispatch) => {
+    dispatch(fetchUsersRequest())
+    axios
+      .get('https://jsonplaceholder.typicode.com/users')
+      .then(response => {
+        // response.data is the users
+        const users = response.data
+        dispatch(fetchUsersSuccess(users))
+      })
+      .catch(error => {
+        // error.message is the error message
+        dispatch(fetchUsersFailure(error.message))
+      })
+  }
+}
+
+export const fetchUsersRequest = () => {
+  return {
+    type: FETCH_USERS_REQUEST
+  }
+}
+
+export const fetchUsersSuccess = users => {
+  return {
+    type: FETCH_USERS_SUCCESS,
+    payload: users
+  }
+}
+
+export const fetchUsersFailure = error => {
+  return {
+    type: FETCH_USERS_FAILURE,
+    payload: error
+  }
+}
+```
 
