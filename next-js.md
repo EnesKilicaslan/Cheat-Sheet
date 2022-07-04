@@ -172,7 +172,13 @@ Next.JS merge and overrides the content of the **Head** component in the App com
   } 
   ```
   
-  
+### Typescript Support
+  - create a file named `tsconfig.json`
+  - `yarn add typescript @types/react`
+  - restart the dev server and it will populate the `tsconfig.json` file
+  - Next.JS also creates `next-env.d.ts` typings file
+  - When we do this, `jsconfig.json` is not in control anymore, `tsconfig.json` is in control.
+  - `GetStaticProps`, `GetStaticPaths`, `GetServerSideProps`, `NextApiRequest`, `NextApiResponse` are types of Next.JS  
   
   
   
