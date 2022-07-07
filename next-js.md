@@ -180,6 +180,24 @@ Next.JS merge and overrides the content of the **Head** component in the App com
   - When we do this, `jsconfig.json` is not in control anymore, `tsconfig.json` is in control.
   - `GetStaticProps`, `GetStaticPaths`, `GetServerSideProps`, `NextApiRequest`, `NextApiResponse` are types of Next.JS  
   
+### Redirects
+  - Redirects are specificied in the `next.config.js` file as following.
   
+  ```javascript
+  module.exports = {
+  redirects: async () => {
+    return [
+      {
+        source: '/about',
+        destination: '/',
+        permanent: false
+      }
+    ]
+  }
+  }
+  ```
+  
+  - permanent means the page permanently redirected (possibly because of movement of the files) and status code ise set to 308 automatically by Next.JS
+  - if we set permanent to false, it means page will be redirected temporarily possibly due to maintainance.
   
   
