@@ -200,4 +200,23 @@ Next.JS merge and overrides the content of the **Head** component in the App com
   - permanent means the page permanently redirected (possibly because of movement of the files) and status code ise set to 308 automatically by Next.JS
   - if we set permanent to false, it means page will be redirected temporarily possibly due to maintainance.
   
+### Enviroment Variables
+  - apps typically require enviroment variables.
+  - they allow use to define values based on development, production and testing.
+  - enables safeguard secrets by not bundling them into the code that is shipped to the browser
+  - the file name has to be `.env.local`.
+  - we can access the variables defined in the file `.env.local` from `getStaticProps` and `getServerSideProps` by using `process.env.[variable-name]`
+  - as note, we can not destructure `proccess.env`
+  - in the component jsx we can not access the enviroment variables, meaing they are not exposed to the browser
+  - to expose the enviroment variables to public we need to add `NEXT_PUBLIC_` prefix to the variable.
+  - Enviroment variables are used to set base url, secrets like API-KEY
+  - example `.env.local` file is as following;
   
+  ```
+    API_KEY=EF2JSA@!ASDSAD$#
+    DB_USER_PASS=next!paswds
+    NEXT_PUBLIC_ANALYTICS_ID=1234
+  ```
+  
+  
+
